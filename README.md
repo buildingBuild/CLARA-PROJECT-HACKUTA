@@ -39,7 +39,7 @@ Her goal isn’t speed. It’s clarity.
 - **Google Gemini Pro** – AI explanation engine
 - **ElevenLabs** – natural voice generation
 - **D-ID** – talking face rendering
-- **Vanilla HTML/CSS/JS** –
+- **Vanilla HTML/CSS/JS** – frontend
 - _(Optional)_ Nodemailer / Resend – for email summaries
 - _(Optional)_ Sees images of user to determine if they understood
 
