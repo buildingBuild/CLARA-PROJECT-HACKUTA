@@ -1,12 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { ElevenLabsClient, play } from '@elevenlabs/elevenlabs-js';
+import axios from 'axios'
 import express from 'express'
 const app = express()
 const port = process.env.PORT
 const googleKey = process.env.GOOGLE_AI_KEY
 const elevenlabsKey = process.env.ELEVEN_LABS_KEY
-
-
+const avatarApiKey = process.env.D_ID_API_KEY.trim()
+console.log(avatarApiKey)
 
 // Male voice at index 0
 const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
@@ -27,7 +28,7 @@ const question = "Explain functions Clara Im confused"
 const systemPrompt = `Your role is simple but important: generate a clear, empathetic, and human-like text response to the user’s question. Keep your tone calm, thoughtful, and easy to follow, so the answer feels natural when read aloud. After you create the response, it will be passed to Eleven Labs for voice generation.
 Please don’t alter CLARA’s purpose or workflow — just focus on producing the best possible answer for the user in the moment. Be cooperative, supportive, and people-pleasing: aim to make the user feel heard, understood, and gently guided.
 Always consider past chats when available, so your response feels consistent and remembers prior context. The system prompt, past chats, and the user’s current question will be combined as:
-\${systemPrompt} + \${pastChats} + \${question}. Keep your response short and sweet.
+\${systemPrompt} + \${pastChats} + \${question}. Keep your response short and sweet 20 words max.
 `;
 
 
@@ -48,7 +49,7 @@ async function main() {
 
 
     const audio = await elevenlabs.textToSpeech.convert(
-        `${voice_ids[0]}`, // voice_id
+        `${voice_ids[1]}`, // voice_id
         {
             text: `${text_to_speech_val}`,
             modelId: 'eleven_multilingual_v2',
@@ -57,6 +58,51 @@ async function main() {
     );
     await play(audio);
     console.log("I am here")
+
+
+    const obj = {
+        type: "text",
+        input: "I love to make simple API calls"
+
+    }
+
+    const createTalk = async () => {
+        try {
+            const response = await axios.post(
+                'https://api.d-id.com/talks',
+                {
+                    source_url: 'https://i.imgur.com/CONJpiu.jpg',
+                    script: {
+                        type: 'text',
+                        provider: {
+                            type: 'microsoft',
+                            voice_id: 'en-US-JennyNeural'
+                        },
+                        input: 'Hello there avatar!',
+                        ssml: false
+                    }
+                },
+                {
+                    headers: {
+                        'Authorization': `Basic ${avatarApiKey}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                }
+            );
+            console.log('✅ Talk Created:', response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Status:', error.response?.status);
+            console.error('❌ Error:', error.response?.data);
+        }
+    };
+
+    await createTalk();
+
+
+
+
 }
 
 await main();

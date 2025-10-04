@@ -1,7 +1,7 @@
 <h2 align = "center"> C.L.A.R.A </h2>
 CLARA is an AI assitance tool that doesn’t just give answers she explains them with clarity, patience, and presence, using a realistic voice and a human face that delivers thoughtful, verbal explanations.
 
-CLARA – Codified Linguistic Assistant for Reflective Awareness  
+CLARA – CLARITY LANGUAGE
 A calm, intelligent face that explains what you don’t understand — with voice and thoughful expressions, not just text.
 
 ## 🎬 How It Works
