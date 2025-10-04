@@ -38,7 +38,5 @@ async function main() {
 
 await main();
 
-//console.log(prompt)
-
 
 app.listen(port, () => console.log(`I AM RUNNING ON ${port} and testing env files`))
