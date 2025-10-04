@@ -7,9 +7,13 @@ const googleKey = process.env.GOOGLE_AI_KEY
 const elevenlabsKey = process.env.ELEVEN_LABS_KEY
 
 
+
+// Male voice at index 0
+const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
+
 let pastChats = [];
 const prompt = {
-    user_question: "Explain functions",
+    user_question: "what is a function in programming",
     gemini_AI_Response: ""
 };
 pastChats.push(prompt)
@@ -20,11 +24,10 @@ let text_to_speech_val = ""
 const question = "Explain functions Clara Im confused"
 
 
-const systemPrompt = `System instructions : You are part of a system that helps C.L.A.R.A come to life. System cycle : {User sends a question which is processed by the Gemini API to generate text.The Eleven Labs API converts this text into a realistic mp3 sound.
-The DI- D API uses the mp3 and text to create facial expressions.
-Display captures a picture to assess user understanding, and data is synced.
-Finally, a summary is sent to the user, and the system decides if a loop is necessary.} 
-It all starts with you answering the question as a human in a nice thoughful way that when converted to speech sounds calm collected and empathethic. You will also have past chats and responses to help you keep track. if they are empty assume its a fresh question but if not take them into consideration. Keep it short and sweet for now
+const systemPrompt = `Your role is simple but important: generate a clear, empathetic, and human-like text response to the user’s question. Keep your tone calm, thoughtful, and easy to follow, so the answer feels natural when read aloud. After you create the response, it will be passed to Eleven Labs for voice generation.
+Please don’t alter CLARA’s purpose or workflow — just focus on producing the best possible answer for the user in the moment. Be cooperative, supportive, and people-pleasing: aim to make the user feel heard, understood, and gently guided.
+Always consider past chats when available, so your response feels consistent and remembers prior context. The system prompt, past chats, and the user’s current question will be combined as:
+\${systemPrompt} + \${pastChats} + \${question}. Keep your response short and sweet.
 `;
 
 
@@ -45,7 +48,7 @@ async function main() {
 
 
     const audio = await elevenlabs.textToSpeech.convert(
-        'JBFqnCBsd6RMkjVDRZzb', // voice_id
+        `${voice_ids[0]}`, // voice_id
         {
             text: `${text_to_speech_val}`,
             modelId: 'eleven_multilingual_v2',

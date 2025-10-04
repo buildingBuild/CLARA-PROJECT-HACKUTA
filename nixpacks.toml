@@ -1,0 +1,4 @@
+[phase.setup]
+aptPkgs = [
+    "ffmpeg"
+]
