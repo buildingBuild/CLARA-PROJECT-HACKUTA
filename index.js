@@ -9,6 +9,10 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { v4 as uuidv4 } from "uuid";
 import cors from 'cors';
+import nodemailer from 'nodemailer'
+
+
+
 const app = express()
 const port = process.env.PORT
 const googleKey = process.env.GOOGLE_AI_KEY
@@ -17,6 +21,10 @@ const elevenlabsKey = process.env.ELEVEN_LABS_KEY
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename); /// es module directory stufff
 
+const ai = new GoogleGenAI({ apiKey: googleKey });
+const elevenlabs = new ElevenLabsClient({ apiKey: elevenlabsKey });
+
+
 app.use(cors());
 app.use(express.static('public'))
 
@@ -24,10 +32,97 @@ app.use(express.static('public'))
 
 app.get('/test', (req, res) => {
 
-    console.log("nice")
-    res.status(200).json({
-        message: "Nice fetch "
-    })
+
+})
+
+app.get('/generate', async (req, res) => {
+
+    try {
+        const { email, mood, wish, parent, voice } = req.query
+
+        console.log(typeof parent)
+        console.log(typeof voice)
+        if (parent == "false" && voice == "null") {
+
+            res.status(200).json({
+                message: "user version "
+            })
+
+
+        } else {
+            res.status(200).json({
+                message: "Parent version"
+            })
+
+
+            console.log("BAD")
+
+        }
+
+
+
+
+
+
+
+        res.status(200).json({
+            email: email,
+            mood: mood,
+            wish: wish
+        })
+
+
+        const transporter = nodemailer.createTransport(
+            {
+
+                secure: true,
+                host: 'smtp.gmail.com',
+                port: 465,
+                auth: {
+                    user: 'eneojo.solomon.u@gmail.com',
+                    pass: 'zlwc ufrt mtlm dsid'
+                }
+
+            }
+        );
+
+        await transporter.verify();
+
+        let info = await transporter.sendMail({
+            to: `${email}`,
+            subject: "Your generated stories",
+            text: "You have to believe in the impossible can u ?",
+
+        })
+
+        console.log("Sent", info.messageId)
+
+    }
+    catch (err) {
+        // console.log(err.message)
+    }
+    finally {
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 // Male voice at index 0
@@ -63,10 +158,6 @@ and make sure they are actual stories after e.g likee cinderella little-red ridi
 you will take in usermoods into consideration and their bedtime wish. make it 100 words Max.
 `;
 
-
-
-const ai = new GoogleGenAI({ apiKey: googleKey });
-const elevenlabs = new ElevenLabsClient({ apiKey: elevenlabsKey });
 
 
 app.use('/static', express.static('public'))

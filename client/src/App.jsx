@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -11,6 +11,27 @@ function App() {
   const [userBedTimeWish, setUserBedTimeWish] = useState("")
   const [userEmail,setUserEmail] = useState("")
   const [message,setMessage] = useState("")
+  const [parent,setParent] = useState(false)
+  const [voiceId,setVoiceId] = useState(null)
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioSrc, setAudioSrc] = useState('')
+
+  
+
+  const togglePlayPause = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    } else {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  
+
+
 
 const handleEmail = (e) => setUserEmail(e.target.value)
 const handleMood = (e) => setUserMood(e.target.value)
@@ -27,10 +48,19 @@ catch(err){
 }
 }
 
-useEffect(() => {
 
-console.log(message)
-},[message])
+const fetchGen = async () => {
+
+
+  try{
+    const res  = await fetch(`http://localhost:5000/generate?email=${userEmail}&mood=${userMood}&wish=${userBedTimeWish}&parent=${true}&voice=${voiceId}`)
+    setAudioSrc('http://localhost:5000/static/audio/story.mp3')
+    
+  }catch(err){
+    console.log(err.message)
+  }
+}
+
 
 
   return (
@@ -72,7 +102,12 @@ console.log(message)
 </div>
 
 
-   <button onClick={fetchData}>GENERATE BEDTIME STORY </button>
+   <button onClick={fetchGen}>GENERATE BEDTIME STORIES </button>
+
+   <audio ref={audioRef} src="http://localhost:5000/static/audio/story.mp3" />
+   <button onClick={togglePlayPause}>
+     {isPlaying ? 'Pause' : 'Play'}
+      </button>
 </div>
  
 
@@ -83,7 +118,7 @@ console.log(message)
      <footer>
       <hr/>
       <div className='footer-text'>
-     
+     <div></div>
       <p>© {new Date().getFullYear()} CLARA - All rights reserved. </p>
       </div>
      </footer>
