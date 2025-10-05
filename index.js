@@ -20,6 +20,16 @@ const __dirname = dirname(__filename); /// es module directory stufff
 app.use(cors());
 app.use(express.static('public'))
 
+
+
+app.get('/test', (req, res) => {
+
+    console.log("nice")
+    res.status(200).json({
+        message: "Nice fetch "
+    })
+})
+
 // Male voice at index 0
 const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
 
@@ -90,7 +100,7 @@ async function main() {
         const id = uuidv4();
         const audioDir = path.join(__dirname, "public/audio");
         await fs.mkdir(audioDir, { recursive: true });
-        const audioPath = path.join(audioDir, `story-${i + 1}.mp3`);
+        const audioPath = path.join(audioDir, `story.mp3`);
     
     
         await fs.writeFile(audioPath, audioBuffer);

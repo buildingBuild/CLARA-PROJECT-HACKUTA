@@ -8,15 +8,29 @@ import Starfield from 'react-starfield';
 function App() {
   const [count, setCount] = useState(0)
   const [userMood,setUserMood] = useState("")
-  const [userBedTimeWish,BedTimeWish] = useState("")
+  const [userBedTimeWish, setUserBedTimeWish] = useState("")
+  const [userEmail,setUserEmail] = useState("")
+  const [message,setMessage] = useState("")
 
-const handleEmail = (event) => {
-  const newMood = userMood + event.target.value
-  setUserMood(newMood)
+const handleEmail = (e) => setUserEmail(e.target.value)
+const handleMood = (e) => setUserMood(e.target.value)
+const handleWish = (e) => setUserBedTimeWish(e.target.value)
+
+const fetchData = async() => {
+try{
+  const res = await fetch('http://localhost:5000/test')
+  const data = await res.json();
+  setMessage(data.message)
+}
+catch(err){
+  console.log(err.message)
+}
 }
 
+useEffect(() => {
 
-
+console.log(message)
+},[message])
 
 
   return (
@@ -49,16 +63,16 @@ const handleEmail = (event) => {
 
 <div className='userinputone'>
   <h4>How are you feeling today ?</h4>
-  <input onChange={handleEmail} placeholder="I'm kind of energetic"></input>
+  <input onChange={handleMood} placeholder="I'm kind of energetic"></input>
   </div>
 
 <div className='userinputone'>
   <h4>What's a bedtime wish you'd love for tonight?</h4>
-   <input  oncChange={handleEmail} placeholder='I wish to float above clouds'></input>
+   <input  onChange={handleWish} placeholder='I wish to float above clouds'></input>
 </div>
 
 
-   <button oncClick={handleEmail}>GENERATE BEDTIME STORY </button>
+   <button onClick={fetchData}>GENERATE BEDTIME STORY </button>
 </div>
  
 
