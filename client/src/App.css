@@ -203,3 +203,13 @@ opacity: 0.3;
     opacity: 0.3;
   }
 }
+
+@keyframes fullFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}

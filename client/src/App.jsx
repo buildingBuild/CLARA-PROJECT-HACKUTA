@@ -17,8 +17,10 @@ function App() {
   const [parent,setParent] = useState(false)
   const [voiceId,setVoiceId] = useState(null)
   const audioRef = useRef(null);
+  const bgAudioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioSrc, setAudioSrc] = useState('')
+  const [backAudioSrc,setBackAudioSrc] = useState('')
 
   const [loading, setLoading] = useState(false)
 
@@ -33,6 +35,16 @@ function App() {
       setIsPlaying(false);
     }
   };
+
+  const togglePlay = () => {
+
+if (bgAudioRef.current) {
+    bgAudioRef.current.loop = true;     
+    bgAudioRef.current.volume = 0.3;    
+    bgAudioRef.current.play()
+  }
+
+ }
 
   
 
@@ -73,8 +85,11 @@ const fetchGen = async () => {
 if(loading){
 return (
     <div className="loading-screen">
+      
       <Loading />
-       <h3 className='title-brand'>Patience is a virtue</h3>
+      <br/>
+       <h3 className='title-brand' style={{color:'white'}}>Patience is a virtue</h3>
+       <audio ref={bgAudioRef}  src="http://localhost:5000/static/audio/background.mp3" loop autoPlay/>
     </div>
   )
 }
@@ -104,7 +119,7 @@ return (
 
 <div className='userinputone'>
   <h4>Where to send your stories?</h4>
-   <input onChange={handleEmail} placeholder='drsenku@gmail.com'></input>
+   <input onChange={handleEmail}  onClick={togglePlay}  placeholder='drsenku@gmail.com'></input>
 </div>
 
 <div className='userinputone'>
@@ -124,6 +139,10 @@ return (
    <button onClick={togglePlayPause}>
      {isPlaying ? 'Pause' : 'Play'}
       </button>
+
+
+      <audio ref={bgAudioRef}  src="http://localhost:5000/static/audio/background.mp3" loop autoPlay/>
+
 </div>
  
 
