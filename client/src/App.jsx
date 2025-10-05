@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import brandLogo from './assets/C.L.A.R.A.svg'
 import Starfield from 'react-starfield';
+import Loading from './Loading'
+import { Waveform } from 'ldrs/react'
+import 'ldrs/react/Waveform.css'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +19,8 @@ function App() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioSrc, setAudioSrc] = useState('')
+
+  const [loading, setLoading] = useState(false)
 
   
 
@@ -51,17 +56,28 @@ catch(err){
 
 const fetchGen = async () => {
 
-
   try{
+    setLoading(true)
     const res  = await fetch(`http://localhost:5000/generate?email=${userEmail}&mood=${userMood}&wish=${userBedTimeWish}&parent=${true}&voice=${voiceId}`)
     setAudioSrc('http://localhost:5000/static/audio/story.mp3')
+    setLoading(false)
     
   }catch(err){
     console.log(err.message)
   }
+  finally{
+    setLoading(false)
+  }
 }
 
-
+if(loading){
+return (
+    <div className="loading-screen">
+      <Loading />
+       <h3 className='title-brand'>Patience is a virtue</h3>
+    </div>
+  )
+}
 
   return (
       <div className="container">

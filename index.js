@@ -38,16 +38,24 @@ app.get('/test', (req, res) => {
 app.get('/generate', async (req, res) => {
 
     try {
+
+
+
         const { email, mood, wish, parent, voice } = req.query
 
         console.log(typeof parent)
         console.log(typeof voice)
+
+
+        await DelayNode(10000)
+
+
+
         if (parent == "false" && voice == "null") {
 
             res.status(200).json({
-                message: "user version "
+                message: "user version"
             })
-
 
         } else {
             res.status(200).json({
