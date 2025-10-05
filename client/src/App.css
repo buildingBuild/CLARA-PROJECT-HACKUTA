@@ -7,27 +7,29 @@ body,html{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   
   min-height: 100vh;
   min-width: 100%;
-    color: rgba(255, 255, 255, 0.87);
-      background-color: #0F1C2E;
-      
-
-
-       
+  color: rgba(255, 255, 255, 0.87);
 
 }
 .header-bar{
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 40px;
-width: 95%;
+  width: 95%;
   align-items: center;
-  vertical-align: middle;
+text-align: center;
+width: 100%;
+gap: -10px;
 
 }
+
+
+
 
 .userinputone{
   width: 100%;
@@ -54,6 +56,7 @@ width: 95%;
   display: flex;
   flex-direction: column;
   margin-bottom: 3px;
+  
 }
 
 .userinputone{
@@ -65,23 +68,16 @@ width: 95%;
   color: black;
   border-radius: 10px;
   height: 40px;
+  vertical-align: middle;
 }
 hr{
-  width: 100%;
+  width: 100%
   
 }
 
 
 
-.header-bar .logo{
-  margin-right: auto;
-}
 
-.header-bar .logo img {
-width: 120px;
-  margin-left: 20px;
-  margin-bottom: -20px;
-}
 
 footer{
 margin-top: auto;
@@ -115,7 +111,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background-color: #242424;
+
 width: 50%;
 height: 500px;
   border-radius: 10px;
@@ -151,12 +147,31 @@ font-family: "Quicksand", sans-serif;
   }
 }
 
+.userinputone input{
+  padding: 7px;
+}
+
 
 
 
 button{
   margin-top: 20px;
   padding: 3px;
-  font-size: 1.3em;
+  font-size: 1em;
   padding: 10px;
+}
+
+.h-button{
+  display: flex;
+  flex-direction: column;
+text-align: center;
+    justify-content: center;
+    align-items: center;
+  height: 100%;
+  margin-bottom: 20px;
+
+}
+
+hr{
+opacity: 0.3;
 }
