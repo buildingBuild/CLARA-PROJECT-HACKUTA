@@ -29,6 +29,37 @@ width: 95%;
 
 }
 
+.userinputone{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+}
+
+.userinputone input{
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid white;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.userinputone h1{
+  display: flex;
+  flex-direction: column;
+}
+
+.userinputone h4 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+
+.userinputone{
+  margin-bottom: 30px;
+}
+
 .header-bar button{
   background-color: white;
   color: black;
@@ -59,6 +90,7 @@ flex-direction: column;
   align-items: center;
 gap: 0px;
 width: 100%;
+color: white;
 }
 
 footer hr{
@@ -83,7 +115,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background-color: #2B3E58;
+background-color: #242424;
 width: 50%;
 height: 500px;
   border-radius: 10px;
@@ -102,6 +134,9 @@ height: 500px;
 .title-brand h1{
   margin-bottom: -10px;
   letter-spacing: 10px;
+font-family: "Quicksand", sans-serif;
+  color: white;
+  /* font-family: "Dancing Script", cursive; */
 }
 
 
@@ -117,3 +152,11 @@ height: 500px;
 }
 
 
+
+
+button{
+  margin-top: 20px;
+  padding: 3px;
+  font-size: 1.3em;
+  padding: 10px;
+}

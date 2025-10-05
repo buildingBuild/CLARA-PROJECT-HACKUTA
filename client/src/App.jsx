@@ -21,7 +21,7 @@ function App() {
 </div>
 
 <hr></hr>
-  <Starfield
+  <Starfield style={{zIndex : 0}}
             starCount={1000}
             starColor={[255, 255, 255]}
             speedFactor={0.05}
@@ -32,16 +32,21 @@ function App() {
   <h1>C.L.A.R.A</h1>
   <h3>Comforting Lullabies And Restful Atmosphere</h3>
 
+<div className='userinputone'>
   <h4>How are you feeling today</h4>
   <input></input>
+  </div>
 
-  <h4>Whats a bedtime wish you have</h4>
-  
-  <input></input>
-    <button>GENERATE BEDTIME STORY </button>
+<div className='userinputone'>
+  <h4>What's a bedtime wish you'd love for tonight?</h4>
+   <input></input>
 </div>
+ 
+ 
+</div>
+   <button>GENERATE BEDTIME STORY </button>
 
- <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio>
+ {/* <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio> */}
 
  </div>
 
