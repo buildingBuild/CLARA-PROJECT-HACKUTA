@@ -12,6 +12,13 @@ Whether it's a child hearing a story in a parent's voice or an adult managing in
 <li> Uses Google Gemini to create emotionally aware responses in natural language </li>
 <li> Converts story to audio using ElevenLabs text-to-speech engine </li>
 <li> Supports “parent voice mode” with speech fillers and a more human tone </li>
+<li> Gathers user mood, bedtime wish, and email to craft deeply personalized bedtime stories </li>
+<li> Uses Google Gemini to generate calm, emotionally intelligent narratives tailored to user input </li>
+<li> Converts generated stories into natural-sounding audio using ElevenLabs’ voice synthesis API </li>
+<li> Offers optional “Parent Voice Mode” that adds warmth, fillers, and a human storytelling tone </li>
+<li> Emails the generated stories directly to the user for future playback and comfort </li>
+<li> Includes playback controls, loading animations, and “Generate Another” options for seamless interaction </li>
+
 
 ## Extra Features
 
