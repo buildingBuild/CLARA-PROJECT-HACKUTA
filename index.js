@@ -1,13 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 import { ElevenLabsClient, play } from '@elevenlabs/elevenlabs-js';
+import { SyncClient } from "@sync.so/sdk";
 import axios from 'axios'
 import express from 'express'
 const app = express()
 const port = process.env.PORT
 const googleKey = process.env.GOOGLE_AI_KEY
 const elevenlabsKey = process.env.ELEVEN_LABS_KEY
-const avatarApiKey = process.env.D_ID_API_KEY.trim()
-console.log(avatarApiKey)
+//const avatarApiKey = process.env.D_ID_API_KEY.trim()
+let videoId = ""
+
 
 // Male voice at index 0
 const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
@@ -58,50 +60,6 @@ async function main() {
     );
     await play(audio);
     console.log("I am here")
-
-
-    const obj = {
-        type: "text",
-        input: "I love to make simple API calls"
-
-    }
-
-    const createTalk = async () => {
-        try {
-            const response = await axios.post(
-                'https://api.d-id.com/talks',
-                {
-                    source_url: 'https://i.imgur.com/CONJpiu.jpg',
-                    script: {
-                        type: 'text',
-                        provider: {
-                            type: 'microsoft',
-                            voice_id: 'en-US-JennyNeural'
-                        },
-                        input: 'Hello there avatar!',
-                        ssml: false
-                    }
-                },
-                {
-                    headers: {
-                        'Authorization': `Basic ${avatarApiKey}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
-            );
-            console.log('✅ Talk Created:', response.data);
-            return response.data;
-        } catch (error) {
-            console.error('❌ Status:', error.response?.status);
-            console.error('❌ Error:', error.response?.data);
-        }
-    };
-
-    await createTalk();
-
-
-
 
 }
 
