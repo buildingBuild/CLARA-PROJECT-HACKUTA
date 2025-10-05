@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import brandLogo from './assets/clara2logo.png'
+import brandLogo from './assets/C.L.A.R.A.svg'
 import Starfield from 'react-starfield';
 
 function App() {
@@ -31,6 +31,14 @@ function App() {
 <div className="title-brand">
   <h1>C.L.A.R.A</h1>
   <h3>Comforting Lullabies And Restful Atmosphere</h3>
+
+  <h4>How are you feeling today</h4>
+  <input></input>
+
+  <h4>Whats a bedtime wish you have</h4>
+  
+  <input></input>
+    <button>GENERATE BEDTIME STORY </button>
 </div>
 
  <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio>

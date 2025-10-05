@@ -103,6 +103,8 @@ async function main() {
 
 
 }
+
+
 await main();
 
 app.listen(port, () => console.log(`I AM RUNNING ON ${port} and testing env files`))
