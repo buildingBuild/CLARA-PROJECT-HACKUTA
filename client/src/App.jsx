@@ -73,7 +73,7 @@ const fetchGen = async () => {
 
   try{
     setLoading(true)
-    const res  = await fetch(`http://localhost:5000/generate?email=${userEmail}&mood=${userMood}&wish=${userBedTimeWish}&parent=${true}&voice=${voiceId}`)
+    const res  = await fetch(`http://localhost:5000/generate?email=${userEmail}&mood=${userMood}&wish=${userBedTimeWish}&voice=${voiceId}`)
     setAudioSrc('http://localhost:5000/static/audio/story.mp3')
     setLoading(false)
  setShowFormVisible("none");
@@ -91,10 +91,11 @@ if(loading){
 return (
     <div className="loading-screen">
       
-      <div></div>
+      <div style={{display : 'flex', flexDirection: 'column'}}>
       <Loading />
        <h3 className='title-brand' style={{color:'white'}}>Patience is a Virtue</h3>
        <audio ref={bgAudioRef}  src="http://localhost:5000/static/audio/background.mp3" loop autoPlay/>
+       </div>
     </div>
   )
 }
@@ -120,7 +121,8 @@ return (
 <div className='action-box'>
 <div className="title-brand">
   <h1>C.L.A.R.A</h1>
-  <h3>Comforting Lullabies And Restful Atmosphere</h3>
+  <h3>Comforting Lullabies And Relaxation AI Assistant</h3>
+
 
 <div className='prompts' style={{ display: showForm }}>
 <div className='userinputone'>
@@ -137,18 +139,24 @@ return (
   <h4>What's a bedtime wish you'd love for tonight?</h4>
    <input  onChange={handleWish} placeholder='I wish to float above clouds'></input>
 </div>
+
+<div className='userinputone'>
+ <a href='https://elevenlabs.io/app/voice-lab' target='_blank'> <h4> Parents enter your voice id to mimic your voice(optional)</h4></a>
+   <input  onChange={handleWish} placeholder='6767676sixseven'></input>
+</div>
 <button onClick={fetchGen}>GENERATE BEDTIME STORIES </button>
 </div>
 
 
    
 
-   <audio ref={audioRef} src="http://localhost:5000/static/audio/story.mp3" />
+   <audio ref={audioRef} src={audioSrc} />
+   {audioSrc && (
    <button onClick={togglePlayPause} style={{display : 'flex', alignItems: "center"}}>
-
     <img src={play}></img>
      {isPlaying ? 'Pause' : 'Play'}
       </button>
+    )}
 
 
       <audio ref={bgAudioRef}  src="http://localhost:5000/static/audio/background.mp3" loop autoPlay/>
