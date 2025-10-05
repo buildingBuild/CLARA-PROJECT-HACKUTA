@@ -34,3 +34,7 @@ Whether it's a child hearing a story in a parent's voice or an adult managing in
 <li> Voice options make it accessible, comforting, and easy to personalize </li>
 
 ## Screenshots
+<div>
+<img width="200" alt = "active view2" src="" />
+<img width="250" height ="auto" alt="Active view" src="" />
+</div>
