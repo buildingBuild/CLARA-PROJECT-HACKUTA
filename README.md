@@ -35,6 +35,7 @@ Whether it's a child hearing a story in a parent's voice or an adult managing in
 
 ## Screenshots
 <div>
-<img width="200" alt = "active view2" src="" />
-<img width="250" height ="auto" alt="Active view" src="" />
+<img width="200" alt = "active view2" src="1.png" />
+<img width="250" height ="auto" alt="Active view" src="2.png" />
+  <img width="250" height ="auto" alt="Active view" src="3.png" />
 </div>
