@@ -59,6 +59,8 @@ const ai = new GoogleGenAI({ apiKey: googleKey });
 const elevenlabs = new ElevenLabsClient({ apiKey: elevenlabsKey });
 
 
+app.use('/static', express.static('public'))
+
 async function main() {
 
     /*
@@ -93,10 +95,6 @@ async function main() {
     
         await fs.writeFile(audioPath, audioBuffer);
         console.log(`Saved at: ${audioPath}`);
-    
-    
-    
-    
     
     
     */
