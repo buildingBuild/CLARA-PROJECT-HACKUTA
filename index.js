@@ -47,7 +47,7 @@ app.get('/generate', async (req, res) => {
         console.log(typeof voice)
 
 
-        await DelayNode(10000)
+        await new Promise(resolve => setTimeout(resolve, 10000));
 
 
 

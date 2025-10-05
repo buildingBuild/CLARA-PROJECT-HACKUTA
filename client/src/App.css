@@ -213,3 +213,9 @@ opacity: 0.3;
     opacity: 0.3;
   }
 }
+
+.prompts{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

@@ -1,6 +1,8 @@
 import { useEffect, useState,useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import pause from './assets/Pause.svg'
+import play from './assets/play.svg'
 import './App.css'
 import brandLogo from './assets/C.L.A.R.A.svg'
 import Starfield from 'react-starfield';
@@ -21,6 +23,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioSrc, setAudioSrc] = useState('')
   const [backAudioSrc,setBackAudioSrc] = useState('')
+   const [showForm, setShowFormVisible] = useState("flex") 
 
   const [loading, setLoading] = useState(false)
 
@@ -73,6 +76,8 @@ const fetchGen = async () => {
     const res  = await fetch(`http://localhost:5000/generate?email=${userEmail}&mood=${userMood}&wish=${userBedTimeWish}&parent=${true}&voice=${voiceId}`)
     setAudioSrc('http://localhost:5000/static/audio/story.mp3')
     setLoading(false)
+ setShowFormVisible("none");
+    
     
   }catch(err){
     console.log(err.message)
@@ -86,9 +91,9 @@ if(loading){
 return (
     <div className="loading-screen">
       
+      <div></div>
       <Loading />
-      <br/>
-       <h3 className='title-brand' style={{color:'white'}}>Patience is a virtue</h3>
+       <h3 className='title-brand' style={{color:'white'}}>Patience is a Virtue</h3>
        <audio ref={bgAudioRef}  src="http://localhost:5000/static/audio/background.mp3" loop autoPlay/>
     </div>
   )
@@ -117,6 +122,7 @@ return (
   <h1>C.L.A.R.A</h1>
   <h3>Comforting Lullabies And Restful Atmosphere</h3>
 
+<div className='prompts' style={{ display: showForm }}>
 <div className='userinputone'>
   <h4>Where to send your stories?</h4>
    <input onChange={handleEmail}  onClick={togglePlay}  placeholder='drsenku@gmail.com'></input>
@@ -131,12 +137,16 @@ return (
   <h4>What's a bedtime wish you'd love for tonight?</h4>
    <input  onChange={handleWish} placeholder='I wish to float above clouds'></input>
 </div>
+<button onClick={fetchGen}>GENERATE BEDTIME STORIES </button>
+</div>
 
 
-   <button onClick={fetchGen}>GENERATE BEDTIME STORIES </button>
+   
 
    <audio ref={audioRef} src="http://localhost:5000/static/audio/story.mp3" />
-   <button onClick={togglePlayPause}>
+   <button onClick={togglePlayPause} style={{display : 'flex', alignItems: "center"}}>
+
+    <img src={play}></img>
      {isPlaying ? 'Pause' : 'Play'}
       </button>
 
