@@ -43,7 +43,7 @@ function App() {
 
 if (bgAudioRef.current) {
     bgAudioRef.current.loop = true;     
-    bgAudioRef.current.volume = 0.3;    
+    bgAudioRef.current.volume = 0.03;    
     bgAudioRef.current.play()
   }
 

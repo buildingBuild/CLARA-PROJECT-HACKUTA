@@ -75,8 +75,8 @@ app.get('/generate', async (req, res) => {
         let usermood = mood
         let bedtimeWish = wish
 
-        if (!voice) {
-            voice = null
+        if (!voice || voice === "null" || voice === "undefined") {
+            voice = voice_ids[1];
         }
 
         const response = await ai.models.generateContent({
@@ -91,7 +91,7 @@ app.get('/generate', async (req, res) => {
 
         if (voice) {
             audio = await elevenlabs.textToSpeech.convert(
-                `${voice}`, // voice_id
+                voice, // voice_id
                 {
                     text: `${text_to_speech_val}`,
                     modelId: 'eleven_multilingual_v2',
@@ -101,7 +101,7 @@ app.get('/generate', async (req, res) => {
         }
         else {
             audio = await elevenlabs.textToSpeech.convert(
-                `${voice_ids[1]}`, // voice_id
+                voice, // voice_id
                 {
                     text: `${text_to_speech_val}`,
                     modelId: 'eleven_multilingual_v2',
