@@ -146,7 +146,7 @@ app.get('/generate', async (req, res) => {
         let info = await transporter.sendMail({
             to: `${email}`,
             subject: "Your generated stories",
-            text: "You have to believe in the impossible can u ?",
+            text: `Your generated story ${generatedStoriesForEmail}`,
 
         })
 
