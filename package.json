@@ -23,7 +23,9 @@
     "@google/genai": "^1.22.0",
     "@sync.so/sdk": "^0.2.5",
     "axios": "^1.12.2",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "uuid": "^13.0.0"
   }
 }

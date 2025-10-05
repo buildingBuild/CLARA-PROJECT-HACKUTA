@@ -15,10 +15,9 @@ Coming soon hosted version in progress
 <li> Converts story to audio using ElevenLabs text-to-speech engine </li>
 <li> Supports “parent voice mode” with speech fillers and a more human tone </li>
 
-## Features
+## Extra Features
 
-<li> Rating stories feature for others to access</li>
-<li> Option to save and reuse audio files to conserve API usage </li>
+<li> Rating stories to have a global rankings for others to access</li>
 <li> Future plans: Image cover generation and emailed stories </li>
 
 ## Tech Stack
@@ -35,3 +34,5 @@ Coming soon hosted version in progress
 <li> Supports adults with anxiety, insomnia, or racing thoughts through calm storytelling </li>
 <li> Encourages consistent bedtime routines backed by gentle, emotionally intelligent design </li>
 <li> Voice options make it accessible, comforting, and easy to personalize </li>
+
+## 💡 Wish me luck working as a solo

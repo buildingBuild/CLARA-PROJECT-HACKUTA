@@ -7,6 +7,8 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { v4 as uuidv4 } from "uuid";
+import cors from 'cors';
 const app = express()
 const port = process.env.PORT
 const googleKey = process.env.GOOGLE_AI_KEY
@@ -15,7 +17,8 @@ const elevenlabsKey = process.env.ELEVEN_LABS_KEY
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename); /// es module directory stufff
 
-
+app.use(cors());
+app.use(express.static('public'))
 
 // Male voice at index 0
 const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
@@ -23,8 +26,9 @@ const voice_ids = ["I3M3nb9pIAmagyf8aCSq", "dmDD8T933s9glsN800C3"]
 let text_to_speech_val = ""
 let usermood = "I am feeling happy but not to crazy"
 let bedtimeWish = "I want to fly I wish I could fly"
+let parent_voice_mode = "false";
 
-
+let i = 0;
 
 const systemPrompt = `
 Your job is simple but special: create a soft, emotionally intelligent bedtime story or message based on the user’s mood and bedtime wish.
@@ -46,10 +50,7 @@ or
 “So, lets see… there was a little dream waiting to be told…”
 and make sure they are actual stories after e.g likee cinderella little-red riding hood and studio ghibli vibes there will be music 
 
-you will take in usermoods into consideration and their bedtime wish.
-
-
-but for now ignore all and generate two sentences
+you will take in usermoods into consideration and their bedtime wish. make it 100 words Max.
 `;
 
 
@@ -60,15 +61,16 @@ const elevenlabs = new ElevenLabsClient({ apiKey: elevenlabsKey });
 
 async function main() {
 
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: `give one sentence`
-        //${systemPrompt} + ${usermood} ${bedtimeWish}`
-    });
-    console.log(response.text);
-    text_to_speech_val = response.text
-
     /*
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: ` ////system instruction: ${systemPrompt} + user mood : ${usermood} user bedtime wish : ${bedtimeWish} + parent_voide_mode${parent_voice_mode}`
+    
+        });
+        console.log(response.text);
+        text_to_speech_val = response.text
+    
+    
         const audio = await elevenlabs.textToSpeech.convert(
             `${voice_ids[1]}`, // voice_id
             {
@@ -77,47 +79,32 @@ async function main() {
                 outputFormat: 'mp3_44100_128', // output_format
             }
         );
-        */
-    const audioPath = path.join(__dirname, 'audio_output', 'clara_audio.mp3');
-    await play(audioPath);
-
-
-
-    /*
     
-        const outDir = path.join(__dirname, 'audio_output');
-        await fs.mkdir(outDir, { recursive: true });
-    
-        let buf;
-        if (typeof audio?.arrayBuffer === 'function') {
-            buf = Buffer.from(await audio.arrayBuffer());
-        } else if (audio?.[Symbol.asyncIterator]) {
-            const chunks = [];
-            for await (const chunk of audio) chunks.push(Buffer.from(chunk));
-            buf = Buffer.concat(chunks);
-        } else if (Buffer.isBuffer(audio)) {
-            buf = audio;
-        } else {
-            throw new Error('Unsupported audio type from ElevenLabs');
+        const chunks = [];
+        for await (const chunk of audio) {
+            chunks.push(chunk);
         }
+        const audioBuffer = Buffer.concat(chunks);
+        const id = uuidv4();
+        const audioDir = path.join(__dirname, "public/audio");
+        await fs.mkdir(audioDir, { recursive: true });
+        const audioPath = path.join(audioDir, `story-${i + 1}.mp3`);
     
-        await fs.writeFile(path.join(outDir, 'clara_audio.mp3'), buf);
+    
+        await fs.writeFile(audioPath, audioBuffer);
+        console.log(`Saved at: ${audioPath}`);
     
     
-    }
+    
+    
+    
+    
     */
+
+
+
 
 }
 await main();
 
 app.listen(port, () => console.log(`I AM RUNNING ON ${port} and testing env files`))
-
-
-/*
-app.get('/audio/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const audioPath = path.join(__dirname, 'audio', filename); // Assuming audio files are in an 'audio' directory
-    res.sendFile(audioPath);
-});
-
-*/
