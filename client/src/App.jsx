@@ -7,8 +7,22 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
+      <div className="container">
+<div className="header-bar">
+  <p>About us</p>
+  <p>How it works</p>
+  <button>Sign Up</button> 
+</div>
+<hr></hr>
+
+
+
+<div className="header">
+  <h1></h1>
+</div>
+
+
+
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -25,8 +39,8 @@ function App() {
 
 
        <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio>
-      </div>
-      <h1>C-L-A-R-A</h1>
+     
+      <h1>C.L.A.R.A</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -35,10 +49,17 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+
+     <footer>
+      <h1>Report an issue</h1>
+      <h1>Report an issue</h1>
+      <h1>Report an issue</h1>
+     </footer>
+     
+
+       </div>
+  
   )
 }
 
