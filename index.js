@@ -68,8 +68,8 @@ app.get('/test', (req, res) => {
 app.get('/generate', async (req, res) => {
 
     try {
-
-        const { email, mood, wish, voice } = req.query
+        let audio;
+        let { email, mood, wish, voice } = req.query
 
         let text_to_speech_val = ""
         let usermood = mood
@@ -81,7 +81,7 @@ app.get('/generate', async (req, res) => {
 
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            contents: ` system instruction: ${systemPrompt} + user mood : ${usermood} user bedtime wish : ${bedtimeWish} + parent_voice_mode${parent_voice_mode}`
+            contents: ` system instruction: ${systemPrompt} + user mood : ${usermood} user bedtime wish : ${bedtimeWish} + if there is voice id and its not null or undefined its parent voice:${voice}`
 
         });
         console.log(response.text);
@@ -90,7 +90,7 @@ app.get('/generate', async (req, res) => {
 
 
         if (voice) {
-            const audio = await elevenlabs.textToSpeech.convert(
+            audio = await elevenlabs.textToSpeech.convert(
                 `${voice}`, // voice_id
                 {
                     text: `${text_to_speech_val}`,
@@ -100,7 +100,7 @@ app.get('/generate', async (req, res) => {
             );
         }
         else {
-            const audio = await elevenlabs.textToSpeech.convert(
+            audio = await elevenlabs.textToSpeech.convert(
                 `${voice_ids[1]}`, // voice_id
                 {
                     text: `${text_to_speech_val}`,
