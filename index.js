@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { ElevenLabsClient, play } from '@elevenlabs/elevenlabs-js';
 import { SyncClient } from "@sync.so/sdk";
+import { promises as fs } from 'fs';
 import axios from 'axios'
 import express from 'express'
 const app = express()
@@ -24,13 +25,31 @@ pastChats.push(prompt)
 
 
 let text_to_speech_val = ""
-const question = "Explain functions Clara Im confused"
+let usermood = "I am feeling happy but not to crazy"
+let bedtimeWish = "I want to fly I wish I could fly"
 
+const systemPrompt = `
+Your job is simple but special: create a soft, emotionally intelligent bedtime story or message based on the user’s mood and bedtime wish.
+Your words will be spoken aloud by ElevenLabs, so write like someone speaking gently, not typing.
+CLARA’s purpose:
+She’s not a chatbot — she’s a calm, caring,soft intelligent storyteller who helps people drift into rest.
+Every response should feel like it’s wrapping the listener in peace and warmth.
+If parent_voice_mode = true:
+Speak like a loving parent or close friend sitting beside the bed.
+If parent_voice_mode = false
+Never do:
+Don’t mention AI or systems
+Don’t joke, break character, or use irony
 
-const systemPrompt = `Your role is simple but important: generate a clear, empathetic, and human-like text response to the user’s question. Keep your tone calm, thoughtful, and easy to follow, so the answer feels natural when read aloud. After you create the response, it will be passed to Eleven Labs for voice generation.
-Please don’t alter CLARA’s purpose or workflow — just focus on producing the best possible answer for the user in the moment. Be cooperative, supportive, and people-pleasing: aim to make the user feel heard, understood, and gently guided.
-Always consider past chats when available, so your response feels consistent and remembers prior context. The system prompt, past chats, and the user’s current question will be combined as:
-\${systemPrompt} + \${pastChats} + \${question}. Keep your response short and sweet 20 words max.
+Core Goal
+Make the listener feel safe, seen, and ready to sleep.
+When starting a story, begin naturally — for example:
+“Alright then… once upon a time…”
+or
+“So, lets see… there was a little dream waiting to be told…”
+and make sure they are actual stories after e.g likee cinderella little-red riding hood and studio ghibli vibes there will be music 
+
+you will take in usermoods into consideration and their bedtime wish.
 `;
 
 
@@ -43,7 +62,7 @@ async function main() {
 
     const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: `${systemPrompt} + ${pastChats} + ${question}`
+        contents: `${systemPrompt} + ${usermood} ${bedtimeWish}`
 
     });
     console.log(response.text);
