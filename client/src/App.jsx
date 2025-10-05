@@ -2,63 +2,53 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import brandLogo from './assets/clara2logo.png'
+import Starfield from 'react-starfield';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
       <div className="container">
+        
 <div className="header-bar">
+<div className='logo'>
+<img src={brandLogo}></img>
+</div>
   <p>About us</p>
   <p>How it works</p>
   <button>Sign Up</button> 
 </div>
+
 <hr></hr>
-
-
-
-<div className="header">
-  <h1></h1>
+  <Starfield
+            starCount={1000}
+            starColor={[255, 255, 255]}
+            speedFactor={0.05}
+            backgroundColor="black"
+          />
+<div className='action-box'>
+<div className="title-brand">
+  <h1>C.L.A.R.A</h1>
+  <h3>Comforting Lullabies And Restful Atmosphere</h3>
 </div>
 
+ <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio>
 
-
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-
-
-
-
-
-
-
-
-
-       <audio src='http://localhost:5000/static/audio/story-1.mp3'controls></audio>
-     
-      <h1>C.L.A.R.A</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-
+ </div>
 
      <footer>
-      <h1>Report an issue</h1>
-      <h1>Report an issue</h1>
-      <h1>Report an issue</h1>
+      <hr/>
+      <div className='footer-text'>
+      <p>Report an issue</p>
+      <p>© {new Date().getFullYear()} Synergy Reader. All rights reserved. </p>
+      <p>Contact Us</p>
+      </div>
      </footer>
      
 
-       </div>
+
+  </div>
   
   )
 }
