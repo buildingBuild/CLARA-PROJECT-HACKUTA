@@ -32,7 +32,7 @@ Whether it’s a child hearing a story in a parent’s voice or an adult winding
 <li> Google Gemini API </li>
 <li> HTML / CSS / React.js (Frontend MVP) </li>
 
-## 💡 Why CLARA?
+## 💭 Why CLARA?
 
 <li> Helps children fall asleep to the sound of a familiar voice — even when parents are away </li>
 <li> Supports adults with anxiety, insomnia, or racing thoughts through calm storytelling </li>
