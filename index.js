@@ -135,7 +135,7 @@ app.get('/generate', async (req, res) => {
                 port: 465,
                 auth: {
                     user: 'eneojo.solomon.u@gmail.com',
-                    pass: 'zlwc ufrt mtlm dsid'
+                    pass: ''
                 }
 
             }
